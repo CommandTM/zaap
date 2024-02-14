@@ -1,0 +1,216 @@
+[gd_scene load_steps=17 format=3 uid="uid://b0cd0125a4x6n"]
+
+[ext_resource type="Texture2D" uid="uid://iu1qsva5pgla" path="res://Textures/playerGrid.png" id="1_14ept"]
+[ext_resource type="Texture2D" uid="uid://flwbyb2wsni6" path="res://Textures/greenPlayer.png" id="1_b5knn"]
+[ext_resource type="Script" path="res://Scripts/Manager.cs" id="1_c80sb"]
+[ext_resource type="Texture2D" uid="uid://f8wbcxreuanf" path="res://Textures/RedPiece.png" id="2_cqi5s"]
+[ext_resource type="Texture2D" uid="uid://cl2nmuj7abn43" path="res://Textures/orangePlayer.png" id="2_fe564"]
+[ext_resource type="Script" path="res://Scripts/player.cs" id="2_sguib"]
+[ext_resource type="Texture2D" uid="uid://lyxyv63c23pc" path="res://Textures/playerOutline.png" id="3_5wuxb"]
+[ext_resource type="Texture2D" uid="uid://do2wicyiq736t" path="res://Textures/YellowPiece.png" id="3_abxqy"]
+[ext_resource type="Texture2D" uid="uid://duu7l70d22k4u" path="res://Textures/BluePiece.png" id="4_j4nxm"]
+[ext_resource type="Texture2D" uid="uid://bskllssx4xgrv" path="res://Textures/OrangePiece.png" id="5_hy01q"]
+[ext_resource type="Texture2D" uid="uid://dbpjovh6hg0ko" path="res://Textures/PinkPiece.png" id="6_2b5jq"]
+[ext_resource type="Texture2D" uid="uid://b7xji11uficns" path="res://Textures/GreenPiece.png" id="7_ktmrp"]
+[ext_resource type="Texture2D" uid="uid://d03e1p78wpudr" path="res://Textures/redPlayer.png" id="11_s3o5y"]
+[ext_resource type="Texture2D" uid="uid://ci8r4mnnrlu0b" path="res://Textures/yellowPlayer.png" id="12_mb64l"]
+[ext_resource type="Texture2D" uid="uid://b446pp6uxu28n" path="res://Textures/bluePlayer.png" id="13_equ5e"]
+[ext_resource type="Texture2D" uid="uid://cskus826k7j72" path="res://Textures/purplePlayer.png" id="14_x7u7y"]
+
+[node name="Standard" type="Node2D" node_paths=PackedStringArray("_player", "_gameTime", "_topOne", "_topTwo", "_topThree", "_topFour", "_rightOne", "_rightTwo", "_rightThree", "_rightFour", "_bottomOne", "_bottomTwo", "_bottomThree", "_bottomFour", "_leftOne", "_leftTwo", "_leftThree", "_leftFour")]
+script = ExtResource("1_c80sb")
+_red = ExtResource("2_cqi5s")
+_yellow = ExtResource("3_abxqy")
+_blue = ExtResource("4_j4nxm")
+_orange = ExtResource("5_hy01q")
+_pink = ExtResource("6_2b5jq")
+_green = ExtResource("7_ktmrp")
+_player = NodePath("Player")
+_gameTime = NodePath("Game Speed")
+_topOne = NodePath("Top01")
+_topTwo = NodePath("Top02")
+_topThree = NodePath("Top03")
+_topFour = NodePath("Top04")
+_rightOne = NodePath("Right01")
+_rightTwo = NodePath("Right02")
+_rightThree = NodePath("Right03")
+_rightFour = NodePath("Right04")
+_bottomOne = NodePath("Bottom01")
+_bottomTwo = NodePath("Bottom02")
+_bottomThree = NodePath("Bottom03")
+_bottomFour = NodePath("Bottom04")
+_leftOne = NodePath("Left01")
+_leftTwo = NodePath("Left02")
+_leftThree = NodePath("Left03")
+_leftFour = NodePath("Left04")
+
+[node name="Grid" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(400, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("1_14ept")
+
+[node name="Top01" type="VBoxContainer" parent="."]
+offset_left = 369.0
+offset_top = 269.0
+offset_right = 401.0
+offset_bottom = 538.0
+rotation = 3.14159
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Top02" type="VBoxContainer" parent="."]
+offset_left = 401.0
+offset_top = 269.0
+offset_right = 433.0
+offset_bottom = 538.0
+rotation = 3.14159
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Top03" type="VBoxContainer" parent="."]
+offset_left = 433.0
+offset_top = 269.0
+offset_right = 465.0
+offset_bottom = 538.0
+rotation = 3.14159
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Top04" type="VBoxContainer" parent="."]
+offset_left = 465.0
+offset_top = 269.0
+offset_right = 497.0
+offset_bottom = 538.0
+rotation = 3.14159
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Bottom01" type="VBoxContainer" parent="."]
+offset_left = 337.0
+offset_top = 333.0
+offset_right = 369.0
+offset_bottom = 600.0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Bottom02" type="VBoxContainer" parent="."]
+offset_left = 369.0
+offset_top = 333.0
+offset_right = 401.0
+offset_bottom = 600.0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Bottom03" type="VBoxContainer" parent="."]
+offset_left = 401.0
+offset_top = 333.0
+offset_right = 433.0
+offset_bottom = 600.0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Bottom04" type="VBoxContainer" parent="."]
+offset_left = 433.0
+offset_top = 333.0
+offset_right = 465.0
+offset_bottom = 600.0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Left01" type="HBoxContainer" parent="."]
+offset_left = 369.0
+offset_top = 269.0
+offset_right = 738.0
+offset_bottom = 301.0
+rotation = 3.14159
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Left02" type="HBoxContainer" parent="."]
+offset_left = 369.0
+offset_top = 301.0
+offset_right = 738.0
+offset_bottom = 333.0
+rotation = 3.14159
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Left03" type="HBoxContainer" parent="."]
+offset_left = 369.0
+offset_top = 333.0
+offset_right = 738.0
+offset_bottom = 365.0
+rotation = 3.14159
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Left04" type="HBoxContainer" parent="."]
+offset_left = 369.0
+offset_top = 365.0
+offset_right = 738.0
+offset_bottom = 397.0
+rotation = 3.14159
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Right01" type="HBoxContainer" parent="."]
+offset_left = 433.0
+offset_top = 237.0
+offset_right = 800.0
+offset_bottom = 269.0
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Right02" type="HBoxContainer" parent="."]
+offset_left = 433.0
+offset_top = 269.0
+offset_right = 800.0
+offset_bottom = 301.0
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Right03" type="HBoxContainer" parent="."]
+offset_left = 433.0
+offset_top = 301.0
+offset_right = 800.0
+offset_bottom = 333.0
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Right04" type="HBoxContainer" parent="."]
+offset_left = 433.0
+offset_top = 333.0
+offset_right = 800.0
+offset_bottom = 365.0
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Player" type="Sprite2D" parent="." node_paths=PackedStringArray("_inputDelay")]
+texture_filter = 1
+position = Vector2(353, 253)
+texture = ExtResource("2_fe564")
+script = ExtResource("2_sguib")
+_gridOffset = Vector2(353, 253)
+_gridDistance = 32
+_inputDelay = NodePath("Timer")
+_redPlayer = ExtResource("11_s3o5y")
+_yellowPlayer = ExtResource("12_mb64l")
+_bluePlayer = ExtResource("13_equ5e")
+_orangePlayer = ExtResource("2_fe564")
+_pinkPlayer = ExtResource("14_x7u7y")
+_greenPlayer = ExtResource("1_b5knn")
+
+[node name="Player Border" type="Sprite2D" parent="Player"]
+texture_filter = 1
+texture = ExtResource("3_5wuxb")
+
+[node name="Timer" type="Timer" parent="Player"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Game Speed" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Game Speed" to="." method="_onTick"]
