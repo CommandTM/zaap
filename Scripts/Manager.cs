@@ -16,6 +16,8 @@ public partial class Manager : Node2D
 	[ExportGroup("Elements")] 
 	[Export] private player _player;
 	[Export] private Timer _gameTime;
+	[Export] private RichTextLabel _scoreDisplay;
+	[Export] private RichTextLabel _comboDisplay;
 	[ExportSubgroup("Rows")] 
 	[Export] private VBoxContainer _topOne;
 	[Export] private VBoxContainer _topTwo;
@@ -46,6 +48,9 @@ public partial class Manager : Node2D
 	private Dictionary<PieceType, Texture2D> _typeToTexture;
 
 	private List<PieceType> _possibleSpawns;
+
+	private Statics _staticVars;
+	private int _combo;
 
 	public List<Piece> nextTarget;
 	
@@ -125,10 +130,17 @@ public partial class Manager : Node2D
 		};
 
 		nextTarget = _rowToList[(Row)GD.RandRange(0, 15)];
+
+		_staticVars = GetNode<Statics>("/root/Statics");
+		_staticVars.Score = 0;
+		_combo = 0;
 	}
 	
 	public override void _Process(double delta)
 	{
+		_scoreDisplay.Text = "Score: " + _staticVars.Score;
+		_comboDisplay.Text = "Combo: " + _combo;
+		
 		if (Input.IsActionJustPressed("Manual Tick"))
 		{
 			GD.Print("Tick!");
@@ -156,6 +168,8 @@ public partial class Manager : Node2D
 				{
 					(_player.Color, target[i].Type) = (target[i].Type, _player.Color);
 					target[i].Sprite.Texture = _typeToTexture[target[i].Type];
+					_staticVars.Score = (_combo * 10);
+					_combo = 0;
 					break;
 				}
 			}
@@ -163,6 +177,7 @@ public partial class Manager : Node2D
 			for (int i = 0; i < queuedZaps; i++)
 			{
 				ZapPiece(target);
+				_combo++;
 			}
 		}
 	}
@@ -176,6 +191,7 @@ public partial class Manager : Node2D
 			default:
 				row[0].Sprite.QueueFree();
 				row.RemoveAt(0);
+				_staticVars.Score += 10;
 				break;
 		}
 		
