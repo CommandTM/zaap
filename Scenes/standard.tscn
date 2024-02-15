@@ -27,172 +27,201 @@ _pink = ExtResource("6_2b5jq")
 _green = ExtResource("7_ktmrp")
 _player = NodePath("Player")
 _gameTime = NodePath("Game Speed")
-_topOne = NodePath("Top01")
-_topTwo = NodePath("Top02")
-_topThree = NodePath("Top03")
-_topFour = NodePath("Top04")
-_rightOne = NodePath("Right01")
-_rightTwo = NodePath("Right02")
-_rightThree = NodePath("Right03")
-_rightFour = NodePath("Right04")
-_bottomOne = NodePath("Bottom01")
-_bottomTwo = NodePath("Bottom02")
-_bottomThree = NodePath("Bottom03")
-_bottomFour = NodePath("Bottom04")
-_leftOne = NodePath("Left01")
-_leftTwo = NodePath("Left02")
-_leftThree = NodePath("Left03")
-_leftFour = NodePath("Left04")
+_topOne = NodePath("Tops/Top01")
+_topTwo = NodePath("Tops/Top02")
+_topThree = NodePath("Tops/Top03")
+_topFour = NodePath("Tops/Top04")
+_rightOne = NodePath("Rights/Right01")
+_rightTwo = NodePath("Rights/Right02")
+_rightThree = NodePath("Rights/Right03")
+_rightFour = NodePath("Rights/Right04")
+_bottomOne = NodePath("Bottoms/Bottom01")
+_bottomTwo = NodePath("Bottoms/Bottom02")
+_bottomThree = NodePath("Bottoms/Bottom03")
+_bottomFour = NodePath("Bottoms/Bottom04")
+_leftOne = NodePath("Lefts/Left01")
+_leftTwo = NodePath("Lefts/Left02")
+_leftThree = NodePath("Lefts/Left03")
+_leftFour = NodePath("Lefts/Left04")
 
 [node name="Grid" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(400, 300)
-scale = Vector2(2, 2)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_14ept")
 
-[node name="Top01" type="VBoxContainer" parent="."]
-offset_left = 369.0
-offset_top = 269.0
-offset_right = 401.0
-offset_bottom = 538.0
+[node name="Tops" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.25, 1.25)
+
+[node name="Top01" type="VBoxContainer" parent="Tops"]
+offset_left = 288.8
+offset_top = 209.0
+offset_right = 320.8
+offset_bottom = 418.0
 rotation = 3.14159
-theme_override_constants/separation = 15
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Top02" type="VBoxContainer" parent="."]
-offset_left = 401.0
-offset_top = 269.0
-offset_right = 433.0
-offset_bottom = 538.0
+[node name="Top02" type="VBoxContainer" parent="Tops"]
+offset_left = 321.0
+offset_top = 209.0
+offset_right = 353.0
+offset_bottom = 418.0
 rotation = 3.14159
-theme_override_constants/separation = 15
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Top03" type="VBoxContainer" parent="."]
-offset_left = 433.0
-offset_top = 269.0
-offset_right = 465.0
-offset_bottom = 538.0
+[node name="Top03" type="VBoxContainer" parent="Tops"]
+offset_left = 352.8
+offset_top = 209.0
+offset_right = 384.8
+offset_bottom = 418.0
 rotation = 3.14159
-theme_override_constants/separation = 15
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Top04" type="VBoxContainer" parent="."]
-offset_left = 465.0
-offset_top = 269.0
-offset_right = 497.0
-offset_bottom = 538.0
+[node name="Top04" type="VBoxContainer" parent="Tops"]
+offset_left = 385.0
+offset_top = 209.0
+offset_right = 417.0
+offset_bottom = 418.0
 rotation = 3.14159
-theme_override_constants/separation = 15
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Bottom01" type="VBoxContainer" parent="."]
-offset_left = 337.0
-offset_top = 333.0
-offset_right = 369.0
-offset_bottom = 600.0
-theme_override_constants/separation = 15
+[node name="Bottoms" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.25, 1.25)
+
+[node name="Bottom01" type="VBoxContainer" parent="Bottoms"]
+offset_left = 257.0
+offset_top = 273.0
+offset_right = 289.0
+offset_bottom = 480.0
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Bottom02" type="VBoxContainer" parent="."]
-offset_left = 369.0
-offset_top = 333.0
-offset_right = 401.0
-offset_bottom = 600.0
-theme_override_constants/separation = 15
+[node name="Bottom02" type="VBoxContainer" parent="Bottoms"]
+offset_left = 289.0
+offset_top = 273.0
+offset_right = 321.0
+offset_bottom = 480.0
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Bottom03" type="VBoxContainer" parent="."]
-offset_left = 401.0
-offset_top = 333.0
-offset_right = 433.0
-offset_bottom = 600.0
-theme_override_constants/separation = 15
+[node name="Bottom03" type="VBoxContainer" parent="Bottoms"]
+offset_left = 321.0
+offset_top = 273.0
+offset_right = 353.0
+offset_bottom = 480.0
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Bottom04" type="VBoxContainer" parent="."]
-offset_left = 433.0
-offset_top = 333.0
-offset_right = 465.0
-offset_bottom = 600.0
-theme_override_constants/separation = 15
+[node name="Bottom04" type="VBoxContainer" parent="Bottoms"]
+offset_left = 353.0
+offset_top = 273.0
+offset_right = 385.0
+offset_bottom = 480.0
+theme_override_constants/separation = 3
 alignment = 2
 
-[node name="Left01" type="HBoxContainer" parent="."]
-offset_left = 369.0
-offset_top = 269.0
-offset_right = 738.0
-offset_bottom = 301.0
+[node name="Lefts" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.25, 1.25)
+
+[node name="Left01" type="HBoxContainer" parent="Lefts"]
+offset_left = 289.0
+offset_top = 209.0
+offset_right = 578.0
+offset_bottom = 241.0
 rotation = 3.14159
-theme_override_constants/separation = 16
+theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Left02" type="HBoxContainer" parent="."]
-offset_left = 369.0
-offset_top = 301.0
-offset_right = 738.0
-offset_bottom = 333.0
+[node name="Left02" type="HBoxContainer" parent="Lefts"]
+offset_left = 289.0
+offset_top = 241.0
+offset_right = 578.0
+offset_bottom = 273.0
 rotation = 3.14159
-theme_override_constants/separation = 16
+theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Left03" type="HBoxContainer" parent="."]
-offset_left = 369.0
-offset_top = 333.0
-offset_right = 738.0
-offset_bottom = 365.0
+[node name="Left03" type="HBoxContainer" parent="Lefts"]
+offset_left = 289.0
+offset_top = 273.0
+offset_right = 578.0
+offset_bottom = 305.0
 rotation = 3.14159
-theme_override_constants/separation = 16
+theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Left04" type="HBoxContainer" parent="."]
-offset_left = 369.0
-offset_top = 365.0
-offset_right = 738.0
-offset_bottom = 397.0
+[node name="Left04" type="HBoxContainer" parent="Lefts"]
+offset_left = 289.0
+offset_top = 305.0
+offset_right = 578.0
+offset_bottom = 337.0
 rotation = 3.14159
-theme_override_constants/separation = 16
+theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Right01" type="HBoxContainer" parent="."]
-offset_left = 433.0
-offset_top = 237.0
-offset_right = 800.0
-offset_bottom = 269.0
-theme_override_constants/separation = 16
+[node name="Rights" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.25, 1.25)
+
+[node name="Right01" type="HBoxContainer" parent="Rights"]
+offset_left = 353.0
+offset_top = 177.0
+offset_right = 640.0
+offset_bottom = 209.0
+theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Right02" type="HBoxContainer" parent="."]
-offset_left = 433.0
-offset_top = 269.0
-offset_right = 800.0
-offset_bottom = 301.0
-theme_override_constants/separation = 16
+[node name="Right02" type="HBoxContainer" parent="Rights"]
+offset_left = 353.0
+offset_top = 209.0
+offset_right = 640.0
+offset_bottom = 241.0
+theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Right03" type="HBoxContainer" parent="."]
-offset_left = 433.0
-offset_top = 301.0
-offset_right = 800.0
-offset_bottom = 333.0
-theme_override_constants/separation = 16
+[node name="Right03" type="HBoxContainer" parent="Rights"]
+offset_left = 353.0
+offset_top = 241.0
+offset_right = 640.0
+offset_bottom = 273.0
+theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Right04" type="HBoxContainer" parent="."]
-offset_left = 433.0
-offset_top = 333.0
-offset_right = 800.0
-offset_bottom = 365.0
-theme_override_constants/separation = 16
+[node name="Right04" type="HBoxContainer" parent="Rights"]
+offset_left = 353.0
+offset_top = 273.0
+offset_right = 640.0
+offset_bottom = 305.0
+theme_override_constants/separation = 5
 alignment = 2
 
 [node name="Player" type="Sprite2D" parent="." node_paths=PackedStringArray("_inputDelay")]
 texture_filter = 1
-position = Vector2(353, 253)
+position = Vector2(341, 241)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_fe564")
 script = ExtResource("2_sguib")
-_gridOffset = Vector2(353, 253)
-_gridDistance = 32
+_gridOffset = Vector2(341, 241)
+_gridDistance = 40
 _inputDelay = NodePath("Timer")
 _redPlayer = ExtResource("11_s3o5y")
 _yellowPlayer = ExtResource("12_mb64l")

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbpjovh6hg0ko"
-path="res://.godot/imported/PinkPiece.png-cd5bf5c54bd2c9951bcfaf62aa9a313e.ctex"
+path="res://.godot/imported/pinkPiece.png-51bb9502f788536a07ece21e1170e740.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/PinkPiece.png"
-dest_files=["res://.godot/imported/PinkPiece.png-cd5bf5c54bd2c9951bcfaf62aa9a313e.ctex"]
+source_file="res://Textures/pinkPiece.png"
+dest_files=["res://.godot/imported/pinkPiece.png-51bb9502f788536a07ece21e1170e740.ctex"]
 
 [params]
 

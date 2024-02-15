@@ -191,7 +191,13 @@ public partial class Manager : Node2D
 		sprite.Name = "Piece";
 
 		toSpawn.Sprite = sprite;
-			
+		
+		if (_listToBox[target].RotationDegrees > 0)
+		{
+			sprite.FlipH = true;
+			sprite.FlipV = true;
+		}
+		
 		target.Add(toSpawn);
 		_listToBox[target].AddChild(sprite);
 	}
