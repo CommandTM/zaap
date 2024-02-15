@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mime;
 using ZoopAP.Scripts;
 
@@ -78,6 +79,13 @@ public partial class Manager : Node2D
 			PieceType.Pink,
 			PieceType.Green
 		};
+
+		for (int i = 0; i < 2; i++)
+		{
+			_possibleSpawns.RemoveAt(GD.RandRange(0, _possibleSpawns.Count-1));
+		}
+
+		_player.Color = _possibleSpawns[GD.RandRange(0, _possibleSpawns.Count - 1)];
 		
 		_rowToList= new Dictionary<Row, List<Piece>>()
 		{
@@ -168,7 +176,7 @@ public partial class Manager : Node2D
 				{
 					(_player.Color, target[i].Type) = (target[i].Type, _player.Color);
 					target[i].Sprite.Texture = _typeToTexture[target[i].Type];
-					_staticVars.Score = (_combo * 10);
+					_staticVars.Score += (_combo * 10);
 					_combo = 0;
 					break;
 				}
@@ -199,7 +207,30 @@ public partial class Manager : Node2D
 
 	public void SpawnPiece(List<Piece> target)
 	{
-		Piece toSpawn = new Piece(_possibleSpawns[GD.RandRange(0, _possibleSpawns.Count - 1)]);
+		bool rigSpawn = false;
+		PieceType rigCheck = PieceType.Red;
+		if (target.Count >= 3)
+		{
+			rigSpawn = true;
+			rigCheck = target[0].Type;
+			foreach (Piece piece in target)
+			{
+				if (piece.Type != rigCheck)
+				{
+					rigSpawn = false;
+				}
+			}
+		}
+
+		Piece toSpawn;
+		if (rigSpawn)
+		{
+			toSpawn = new Piece(rigCheck);
+		}
+		else
+		{
+			toSpawn = new Piece(_possibleSpawns[GD.RandRange(0, _possibleSpawns.Count - 1)]);
+		}
 
 		TextureRect sprite = new TextureRect();
 
