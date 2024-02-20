@@ -20,6 +20,8 @@ public partial class Manager : Node2D
 	[Export] private RichTextLabel _scoreDisplay;
 	[Export] private RichTextLabel _comboDisplay;
 	[Export] private RichTextLabel _zappedDisplay;
+	[Export] private RichTextLabel _levelDisplay;
+	[Export] private RichTextLabel _clearsDisplay;
 	[ExportSubgroup("Rows")] 
 	[Export] private VBoxContainer _topOne;
 	[Export] private VBoxContainer _topTwo;
@@ -44,6 +46,8 @@ public partial class Manager : Node2D
 	private List<List<Piece>> _left;
 
 	private Dictionary<Row, List<Piece>> _rowToList;
+	
+	private Dictionary<List<Piece>, Row> _listToRow;
 
 	private Dictionary<List<Piece>, BoxContainer> _listToBox;
 
@@ -58,6 +62,8 @@ public partial class Manager : Node2D
 	private int _level;
 	private int _clearsUntilLevelUp;
 	private int _clearsThreshold;
+
+	private bool _gameOver;
 
 	public List<Piece> nextTarget;
 	
@@ -116,6 +122,26 @@ public partial class Manager : Node2D
 			{ Row.LeftThree, _left[2] },
 			{ Row.LeftFour, _left[3] }
 		};
+		
+		_listToRow= new Dictionary<List<Piece>, Row>()
+		{
+			{ _top[0], Row.TopOne },
+			{ _top[1], Row.TopTwo },
+			{ _top[2], Row.TopThree },
+			{ _top[3], Row.TopFour },
+			{ _right[0], Row.RightOne },
+			{ _right[1], Row.RightTwo },
+			{ _right[2], Row.RightThree },
+			{ _right[3], Row.RightFour },
+			{ _bottom[0], Row.BottomOne },
+			{ _bottom[1], Row.BottomTwo },
+			{ _bottom[2], Row.BottomThree },
+			{ _bottom[3], Row.BottomFour },
+			{ _left[0], Row.LeftOne },
+			{ _left[1], Row.LeftTwo },
+			{ _left[2], Row.LeftThree },
+			{ _left[3], Row.LeftFour }
+		};
 
 		_listToBox = new Dictionary<List<Piece>, BoxContainer>()
 		{
@@ -160,9 +186,16 @@ public partial class Manager : Node2D
 	
 	public override void _Process(double delta)
 	{
+		if (_clearsUntilLevelUp <= 0)
+		{
+			_levelUp();
+		}
+		
 		_scoreDisplay.Text = "Score: " + _staticVars.Score;
 		_comboDisplay.Text = "Combo: " + _combo;
 		_zappedDisplay.Text = "Zapped: " + _staticVars.PiecesZapped;
+		_clearsDisplay.Text = _clearsUntilLevelUp.ToString();
+		_levelDisplay.Text = _level.ToString();
 		
 		if (Input.IsActionJustPressed("Manual Tick"))
 		{
@@ -174,6 +207,12 @@ public partial class Manager : Node2D
 		if (Input.IsActionJustPressed("Pause Ticks"))
 		{
 			_gameTime.Paused = !_gameTime.Paused;
+		}
+
+		if (Input.IsActionJustPressed("Pause") && !_gameOver)
+		{
+			_staticVars.Paused = !_staticVars.Paused;
+			GD.Print("Pause!");
 		}
 		
 		if (Input.IsActionJustPressed("Dash") && !_player.Dashing)
@@ -224,6 +263,14 @@ public partial class Manager : Node2D
 
 	public void SpawnPiece(List<Piece> target)
 	{
+		if ((target.Count == 5 && (int)_listToRow[target] < 8) || 
+			(target.Count == 7 && (int)_listToRow[target] > 7))
+		{
+			_gameOver = true;
+			_staticVars.Paused = true;
+			GD.Print("You Lose!");
+		}
+		
 		bool rigSpawn = false;
 		PieceType rigCheck = PieceType.Red;
 		if (target.Count >= 3)
@@ -283,12 +330,17 @@ public partial class Manager : Node2D
 			_possibleSpawns.Add(_excludedSpawns[index]);
 			_excludedSpawns.RemoveAt(index);
 		}
+
+		_gameTime.WaitTime = 2 - (0.21875 * _level);
 	}
 	
 	private void _onTick()
 	{
-		GD.Print("Tick!");
-		SpawnPiece(nextTarget);
-		nextTarget = _rowToList[(Row)GD.RandRange(0, 15)];
+		if (!_staticVars.Paused)
+		{
+			GD.Print("Tick!");
+			SpawnPiece(nextTarget);
+			nextTarget = _rowToList[(Row)GD.RandRange(0, 15)];
+		}
 	}
 }

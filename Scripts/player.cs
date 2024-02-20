@@ -18,145 +18,152 @@ public partial class player : Sprite2D
 	public bool[,] Grid = new bool[4, 4];
 	public PieceType Color;
 	public bool Dashing;
+	private Statics _staticVars;
+	
 	public override void _Ready()
 	{
 		Grid[0, 0] = true;
 		Color = PieceType.Orange;
+		
+		_staticVars = GetNode<Statics>("/root/Statics");
 	}
 	
 	public override void _Process(double delta)
 	{
-		Tween movement;
-		if (!Dashing)
-		{
-			if (Input.IsActionJustPressed("Cheat Player Color Red"))
+		if (!_staticVars.Paused)
+		{ 
+			Tween movement;
+			if (!Dashing)
 			{
-				Color = PieceType.Red;
-			}
+				if (Input.IsActionJustPressed("Cheat Player Color Red"))
+				{
+					Color = PieceType.Red;
+				}
 
-			if (Input.IsActionJustPressed("Cheat Player Color Yellow"))
-			{
-				Color = PieceType.Yellow;
-			}
+				if (Input.IsActionJustPressed("Cheat Player Color Yellow"))
+				{
+					Color = PieceType.Yellow;
+				}
 
-			if (Input.IsActionJustPressed("Cheat Player Color Blue"))
-			{
-				Color = PieceType.Blue;
-			}
+				if (Input.IsActionJustPressed("Cheat Player Color Blue"))
+				{
+					Color = PieceType.Blue;
+				}
 
-			if (Input.IsActionJustPressed("Cheat Player Color Orange"))
-			{
-				Color = PieceType.Orange;
-			}
+				if (Input.IsActionJustPressed("Cheat Player Color Orange"))
+				{
+					Color = PieceType.Orange;
+				}
 
-			if (Input.IsActionJustPressed("Cheat Player Color Pink"))
-			{
-				Color = PieceType.Pink;
-			}
+				if (Input.IsActionJustPressed("Cheat Player Color Pink"))
+				{
+					Color = PieceType.Pink;
+				}
 
-			if (Input.IsActionJustPressed("Cheat Player Color Green"))
-			{
-				Color = PieceType.Green;
+				if (Input.IsActionJustPressed("Cheat Player Color Green"))
+				{
+					Color = PieceType.Green;
+				}
+			
+				if (Input.IsActionPressed("Up") && _inputDelay.TimeLeft == 0)
+				{
+					RotationDegrees = 0;
+					if (_movePlayerOnGrid(0, 1))
+					{
+						//Position = GetPlayerPosition();
+						movement = GetTree().CreateTween();
+						movement.TweenProperty(this, "position", 
+							GetTruePlayerPosition(), _inputDelay.WaitTime);
+						_inputDelay.Start();
+					}
+				}
+				if (Input.IsActionPressed("Down") && _inputDelay.TimeLeft == 0)
+				{
+					RotationDegrees = -180;
+					if (_movePlayerOnGrid(0, -1)) 
+					{
+						//Position = GetPlayerPosition();
+						movement = GetTree().CreateTween();
+						movement.TweenProperty(this, "position", 
+							GetTruePlayerPosition(), _inputDelay.WaitTime);
+						_inputDelay.Start();
+					}
+				}
+
+				if (Input.IsActionPressed("Right") && _inputDelay.TimeLeft == 0)
+				{
+					RotationDegrees = 90;
+					if (_movePlayerOnGrid(1, 0))
+					{
+						//Position = GetPlayerPosition();
+						movement = GetTree().CreateTween();
+						movement.TweenProperty(this, "position", 
+							GetTruePlayerPosition(), _inputDelay.WaitTime);
+						_inputDelay.Start();
+					}
+				}
+				if (Input.IsActionPressed("Left") && _inputDelay.TimeLeft == 0)
+				{
+					RotationDegrees = -90;
+					if (_movePlayerOnGrid(-1, 0))
+					{
+						//Position = GetPlayerPosition();
+						movement = GetTree().CreateTween();
+						movement.TweenProperty(this, "position", 
+							GetTruePlayerPosition(), _inputDelay.WaitTime);
+						_inputDelay.Start();
+					}
+				}
 			}
 			
-			if (Input.IsActionPressed("Up") && _inputDelay.TimeLeft == 0)
+			if (Input.IsActionJustPressed("Dash") && !Dashing)
 			{
-				RotationDegrees = 0;
-				if (_movePlayerOnGrid(0, 1))
-				{
-					//Position = GetPlayerPosition();
-					movement = GetTree().CreateTween();
-					movement.TweenProperty(this, "position", 
-						GetTruePlayerPosition(), _inputDelay.WaitTime);
-					_inputDelay.Start();
-				}
-			}
-			if (Input.IsActionPressed("Down") && _inputDelay.TimeLeft == 0)
-			{
-				RotationDegrees = -180;
-				if (_movePlayerOnGrid(0, -1)) 
-				{
-					//Position = GetPlayerPosition();
-					movement = GetTree().CreateTween();
-					movement.TweenProperty(this, "position", 
-						GetTruePlayerPosition(), _inputDelay.WaitTime);
-					_inputDelay.Start();
-				}
-			}
+				Dashing = true;
+				Vector2 target = new Vector2();
+				double endRotation = 0;
 
-			if (Input.IsActionPressed("Right") && _inputDelay.TimeLeft == 0)
-			{
-				RotationDegrees = 90;
-				if (_movePlayerOnGrid(1, 0))
+				if (90 - Math.Abs(RotationDegrees) != 0)
 				{
-					//Position = GetPlayerPosition();
-					movement = GetTree().CreateTween();
-					movement.TweenProperty(this, "position", 
-						GetTruePlayerPosition(), _inputDelay.WaitTime);
-					_inputDelay.Start();
-				}
-			}
-			if (Input.IsActionPressed("Left") && _inputDelay.TimeLeft == 0)
-			{
-				RotationDegrees = -90;
-				if (_movePlayerOnGrid(-1, 0))
-				{
-					//Position = GetPlayerPosition();
-					movement = GetTree().CreateTween();
-					movement.TweenProperty(this, "position", 
-						GetTruePlayerPosition(), _inputDelay.WaitTime);
-					_inputDelay.Start();
-				}
-			}
-		}
+					if (RotationDegrees >= 0)
+					{
+						target.Y = 16;
+						endRotation = -180;
+					}
+					else
+					{
+						target.Y = 584;
+						endRotation = 0;
+					}
 
-		if (Input.IsActionJustPressed("Dash") && !Dashing)
-		{
-			Dashing = true;
-			Vector2 target = new Vector2();
-			double endRotation = 0;
-
-			if (90 - Math.Abs(RotationDegrees) != 0)
-			{
-				if (RotationDegrees >= 0)
-				{
-					target.Y = 16;
-					endRotation = -180;
+					target.X = Position.X;
 				}
 				else
 				{
-					target.Y = 584;
-					endRotation = 0;
+					if (RotationDegrees > 0)
+					{
+						target.X = 784;
+						endRotation = -90;
+					}
+					else
+					{
+						target.X = 16;
+						endRotation = 90;
+					}
+
+					target.Y = Position.Y;
 				}
 
-				target.X = Position.X;
+				movement = GetTree().CreateTween();
+				movement.TweenProperty(this, "position", target, _inputDelay.WaitTime*1.4);
+				movement.TweenProperty(this, "rotation_degrees", endRotation, 0);
+				movement.TweenProperty(this, "position", GetTruePlayerPosition(), _inputDelay.WaitTime*1.4);
+				movement.TweenProperty(this, "Dashing", false, 0);
 			}
-			else
+			
+			if (!Input.IsAnythingPressed())
 			{
-				if (RotationDegrees > 0)
-				{
-					target.X = 784;
-					endRotation = -90;
-				}
-				else
-				{
-					target.X = 16;
-					endRotation = 90;
-				}
-
-				target.Y = Position.Y;
+				_inputDelay.Stop();
 			}
-
-			movement = GetTree().CreateTween();
-			movement.TweenProperty(this, "position", target, _inputDelay.WaitTime*1.4);
-			movement.TweenProperty(this, "rotation_degrees", endRotation, 0);
-			movement.TweenProperty(this, "position", GetTruePlayerPosition(), _inputDelay.WaitTime*1.4);
-			movement.TweenProperty(this, "Dashing", false, 0);
-		}
-
-		if (!Input.IsAnythingPressed())
-		{
-			_inputDelay.Stop();
 		}
 
 		switch (Color)

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://f8wbcxreuanf"
-path="res://.godot/imported/RedPiece.png-f85d415bcb22a66aa76966d1bb24d361.ctex"
+path="res://.godot/imported/redPiece.png-0a2371444847f0cf4577346b3a40ae23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/RedPiece.png"
-dest_files=["res://.godot/imported/RedPiece.png-f85d415bcb22a66aa76966d1bb24d361.ctex"]
+source_file="res://Textures/redPiece.png"
+dest_files=["res://.godot/imported/redPiece.png-0a2371444847f0cf4577346b3a40ae23.ctex"]
 
 [params]
 

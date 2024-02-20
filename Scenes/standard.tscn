@@ -3,21 +3,21 @@
 [ext_resource type="Texture2D" uid="uid://iu1qsva5pgla" path="res://Textures/playerGrid.png" id="1_14ept"]
 [ext_resource type="Texture2D" uid="uid://flwbyb2wsni6" path="res://Textures/greenPlayer.png" id="1_b5knn"]
 [ext_resource type="Script" path="res://Scripts/Manager.cs" id="1_c80sb"]
-[ext_resource type="Texture2D" uid="uid://f8wbcxreuanf" path="res://Textures/RedPiece.png" id="2_cqi5s"]
+[ext_resource type="Texture2D" uid="uid://f8wbcxreuanf" path="res://Textures/redPiece.png" id="2_cqi5s"]
 [ext_resource type="Texture2D" uid="uid://cl2nmuj7abn43" path="res://Textures/orangePlayer.png" id="2_fe564"]
 [ext_resource type="Script" path="res://Scripts/player.cs" id="2_sguib"]
 [ext_resource type="Texture2D" uid="uid://lyxyv63c23pc" path="res://Textures/playerOutline.png" id="3_5wuxb"]
-[ext_resource type="Texture2D" uid="uid://do2wicyiq736t" path="res://Textures/YellowPiece.png" id="3_abxqy"]
-[ext_resource type="Texture2D" uid="uid://duu7l70d22k4u" path="res://Textures/BluePiece.png" id="4_j4nxm"]
-[ext_resource type="Texture2D" uid="uid://bskllssx4xgrv" path="res://Textures/OrangePiece.png" id="5_hy01q"]
-[ext_resource type="Texture2D" uid="uid://dbpjovh6hg0ko" path="res://Textures/PinkPiece.png" id="6_2b5jq"]
-[ext_resource type="Texture2D" uid="uid://b7xji11uficns" path="res://Textures/GreenPiece.png" id="7_ktmrp"]
+[ext_resource type="Texture2D" uid="uid://do2wicyiq736t" path="res://Textures/yellowPiece.png" id="3_abxqy"]
+[ext_resource type="Texture2D" uid="uid://duu7l70d22k4u" path="res://Textures/bluePiece.png" id="4_j4nxm"]
+[ext_resource type="Texture2D" uid="uid://bskllssx4xgrv" path="res://Textures/orangePiece.png" id="5_hy01q"]
+[ext_resource type="Texture2D" uid="uid://dbpjovh6hg0ko" path="res://Textures/pinkPiece.png" id="6_2b5jq"]
+[ext_resource type="Texture2D" uid="uid://b7xji11uficns" path="res://Textures/greenPiece.png" id="7_ktmrp"]
 [ext_resource type="Texture2D" uid="uid://d03e1p78wpudr" path="res://Textures/redPlayer.png" id="11_s3o5y"]
 [ext_resource type="Texture2D" uid="uid://ci8r4mnnrlu0b" path="res://Textures/yellowPlayer.png" id="12_mb64l"]
 [ext_resource type="Texture2D" uid="uid://b446pp6uxu28n" path="res://Textures/bluePlayer.png" id="13_equ5e"]
 [ext_resource type="Texture2D" uid="uid://cskus826k7j72" path="res://Textures/purplePlayer.png" id="14_x7u7y"]
 
-[node name="Standard" type="Node2D" node_paths=PackedStringArray("_player", "_gameTime", "_scoreDisplay", "_comboDisplay", "_zappedDisplay", "_topOne", "_topTwo", "_topThree", "_topFour", "_rightOne", "_rightTwo", "_rightThree", "_rightFour", "_bottomOne", "_bottomTwo", "_bottomThree", "_bottomFour", "_leftOne", "_leftTwo", "_leftThree", "_leftFour")]
+[node name="Standard" type="Node2D" node_paths=PackedStringArray("_player", "_gameTime", "_scoreDisplay", "_comboDisplay", "_zappedDisplay", "_levelDisplay", "_clearsDisplay", "_topOne", "_topTwo", "_topThree", "_topFour", "_rightOne", "_rightTwo", "_rightThree", "_rightFour", "_bottomOne", "_bottomTwo", "_bottomThree", "_bottomFour", "_leftOne", "_leftTwo", "_leftThree", "_leftFour")]
 script = ExtResource("1_c80sb")
 _red = ExtResource("2_cqi5s")
 _yellow = ExtResource("3_abxqy")
@@ -30,6 +30,8 @@ _gameTime = NodePath("Game Speed")
 _scoreDisplay = NodePath("Score Label")
 _comboDisplay = NodePath("Combo Display")
 _zappedDisplay = NodePath("Zapped Label")
+_levelDisplay = NodePath("Level Display")
+_clearsDisplay = NodePath("Clears Countdown")
 _topOne = NodePath("Tops/Top01")
 _topTwo = NodePath("Tops/Top02")
 _topThree = NodePath("Tops/Top03")
@@ -290,5 +292,21 @@ bbcode_enabled = true
 text = "Combo:"
 scroll_active = false
 metadata/_edit_use_anchors_ = true
+
+[node name="Clears Countdown" type="RichTextLabel" parent="."]
+offset_left = 768.0
+offset_top = -3.0
+offset_right = 807.0
+offset_bottom = 21.0
+bbcode_enabled = true
+text = "XXX"
+
+[node name="Level Display" type="RichTextLabel" parent="."]
+offset_left = 779.0
+offset_top = 577.0
+offset_right = 807.0
+offset_bottom = 600.0
+bbcode_enabled = true
+text = "XX"
 
 [connection signal="timeout" from="Game Speed" to="." method="_onTick"]
