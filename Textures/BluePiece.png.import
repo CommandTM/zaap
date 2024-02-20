@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://duu7l70d22k4u"
-path="res://.godot/imported/bluePiece.png-fb5cf6e4576103ace7d23d3c7d9d8580.ctex"
+path="res://.godot/imported/BluePiece.png-7533bc67eda357dbda3ed813d2bdf42a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/bluePiece.png"
-dest_files=["res://.godot/imported/bluePiece.png-fb5cf6e4576103ace7d23d3c7d9d8580.ctex"]
+source_file="res://Textures/BluePiece.png"
+dest_files=["res://.godot/imported/BluePiece.png-7533bc67eda357dbda3ed813d2bdf42a.ctex"]
 
 [params]
 

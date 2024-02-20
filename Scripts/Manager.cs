@@ -19,6 +19,7 @@ public partial class Manager : Node2D
 	[Export] private Timer _gameTime;
 	[Export] private RichTextLabel _scoreDisplay;
 	[Export] private RichTextLabel _comboDisplay;
+	[Export] private RichTextLabel _zappedDisplay;
 	[ExportSubgroup("Rows")] 
 	[Export] private VBoxContainer _topOne;
 	[Export] private VBoxContainer _topTwo;
@@ -49,9 +50,14 @@ public partial class Manager : Node2D
 	private Dictionary<PieceType, Texture2D> _typeToTexture;
 
 	private List<PieceType> _possibleSpawns;
+	private List<PieceType> _excludedSpawns;
 
 	private Statics _staticVars;
 	private int _combo;
+	
+	private int _level;
+	private int _clearsUntilLevelUp;
+	private int _clearsThreshold;
 
 	public List<Piece> nextTarget;
 	
@@ -80,9 +86,13 @@ public partial class Manager : Node2D
 			PieceType.Green
 		};
 
+		_excludedSpawns = new List<PieceType>();
+
 		for (int i = 0; i < 2; i++)
 		{
-			_possibleSpawns.RemoveAt(GD.RandRange(0, _possibleSpawns.Count-1));
+			int index = GD.RandRange(0, _possibleSpawns.Count - 1);
+			_excludedSpawns.Add(_possibleSpawns[index]);
+			_possibleSpawns.RemoveAt(index);
 		}
 
 		_player.Color = _possibleSpawns[GD.RandRange(0, _possibleSpawns.Count - 1)];
@@ -142,12 +152,17 @@ public partial class Manager : Node2D
 		_staticVars = GetNode<Statics>("/root/Statics");
 		_staticVars.Score = 0;
 		_combo = 0;
+
+		_level = 1;
+		_clearsThreshold = 60;
+		_clearsUntilLevelUp = 60;
 	}
 	
 	public override void _Process(double delta)
 	{
 		_scoreDisplay.Text = "Score: " + _staticVars.Score;
 		_comboDisplay.Text = "Combo: " + _combo;
+		_zappedDisplay.Text = "Zapped: " + _staticVars.PiecesZapped;
 		
 		if (Input.IsActionJustPressed("Manual Tick"))
 		{
@@ -200,6 +215,8 @@ public partial class Manager : Node2D
 				row[0].Sprite.QueueFree();
 				row.RemoveAt(0);
 				_staticVars.Score += 10;
+				_staticVars.PiecesZapped++;
+				_clearsUntilLevelUp--;
 				break;
 		}
 		
@@ -247,6 +264,25 @@ public partial class Manager : Node2D
 		
 		target.Add(toSpawn);
 		_listToBox[target].AddChild(sprite);
+	}
+
+	private void _levelUp()
+	{
+		if (_level == 9)
+		{
+			return;
+		}
+
+		_level++;
+		_clearsThreshold += 20;
+		_clearsUntilLevelUp = _clearsThreshold;
+		
+		if (_level == 4 || _level == 7)
+		{
+			int index = GD.RandRange(0, _excludedSpawns.Count - 1);
+			_possibleSpawns.Add(_excludedSpawns[index]);
+			_excludedSpawns.RemoveAt(index);
+		}
 	}
 	
 	private void _onTick()
